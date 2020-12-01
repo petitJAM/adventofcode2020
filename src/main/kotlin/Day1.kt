@@ -1,6 +1,6 @@
-/*
- * Notes
- */
+import util.head
+import util.readInputFile
+import util.tail
 
 fun day1() {
     val input = readInputFile(1).toIntList()
@@ -43,11 +43,3 @@ private tailrec fun find2NumbersThatSumTo2020(list: List<Int>): Pair<Int, Int> =
         .find { it + list.head == 2020 }
         ?.let { Pair(list.head, it) }
         ?: find2NumbersThatSumTo2020(list.tail)
-
-// Utility
-
-private val <T> List<T>.head: T
-    get() = first()
-
-private val <T> List<T>.tail: List<T>
-    get() = drop(1)
