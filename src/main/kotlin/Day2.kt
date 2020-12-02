@@ -14,10 +14,18 @@ fun day2() {
     val answer = countInvalidPasswords(parsedInput)
     println("The answer to part 1 is ... $answer")
 
-    /**/
-
-    println("The answer to part 2 is ... TODO")
+    val answer2 = countValidPasswords(parsedInput)
+    println("The answer to part 2 is ... $answer2")
 }
+
+// Part 2
+
+private fun countValidPasswords(list: List<Pair<PasswordPolicy, Password>>): Int =
+    list.count { valid2(it.second, it.first) }
+
+private fun valid2(password: Password, passwordPolicy: PasswordPolicy): Boolean =
+    (password[passwordPolicy.firstNum - 1] == passwordPolicy.letter)
+        .xor(password[passwordPolicy.secondNum - 1] == passwordPolicy.letter)
 
 // Part 1
 
@@ -26,7 +34,7 @@ private fun countInvalidPasswords(list: List<Pair<PasswordPolicy, Password>>): I
 
 private fun valid(password: Password, passwordPolicy: PasswordPolicy): Boolean =
     password.count { it == passwordPolicy.letter }.let {
-        passwordPolicy.minimum <= it && it <= passwordPolicy.maximum
+        passwordPolicy.firstNum <= it && it <= passwordPolicy.secondNum
     }
 
 // Data parsing
@@ -35,8 +43,8 @@ typealias Password = String
 
 data class PasswordPolicy(
     val letter: Char,
-    val minimum: Int,
-    val maximum: Int,
+    val firstNum: Int,
+    val secondNum: Int,
 ) {
     companion object {
         fun fromInputString(inputStr: String): PasswordPolicy {
