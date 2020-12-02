@@ -3,7 +3,7 @@ import java.io.File
 fun main(args: Array<String>) {
     println("Hello Advent Of Code!")
     val arg1 = args.toList().firstOrNull()
-    val day = arg1?.toIntOrNull() ?: 1
+    val day = arg1?.toIntOrNull() ?: 2
 
     if (day != null) {
         println()
@@ -11,6 +11,7 @@ fun main(args: Array<String>) {
 
         when (day) {
             1 -> day1()
+            2 -> day2()
             else -> println("That day isn't implemented yet! :(")
         }
 
