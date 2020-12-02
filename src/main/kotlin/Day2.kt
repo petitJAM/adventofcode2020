@@ -1,4 +1,5 @@
 import util.readInputFile
+import util.splitLast
 
 fun day2() {
     val input = readInputFile(2).toList()
@@ -72,8 +73,3 @@ private fun parseInput(input: List<String>): List<Pair<PasswordPolicy, Password>
         .map { it: Pair<String, Password> ->
             Pair(PasswordPolicy.fromInputString(it.first), it.second)
         }
-
-private fun String.splitLast(delimiter: String): Pair<String, String> =
-    lastIndexOf(delimiter).let { index ->
-        substring(0, index) to substring(index + 1)
-    }
