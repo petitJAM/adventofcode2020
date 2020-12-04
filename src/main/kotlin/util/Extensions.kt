@@ -19,3 +19,11 @@ fun String.splitLast(delimiter: String): Pair<String, String> =
     lastIndexOf(delimiter).let { index ->
         substring(0, index) to substring(index + 1)
     }
+
+fun <T> printList(list: List<T>) {
+    println("[")
+    list.forEach {
+        println("  $it")
+    }
+    println("]")
+}
