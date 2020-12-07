@@ -17,7 +17,7 @@ val <T> List<T>.tail: List<T>
  */
 fun String.splitLast(delimiter: String): Pair<String, String> =
     lastIndexOf(delimiter).let { index ->
-        substring(0, index) to substring(index + 1)
+        substring(0, index) to substring(index + delimiter.length)
     }
 
 fun <T> printList(list: List<T>) {
