@@ -4,6 +4,7 @@ https://adventofcode.com/2020
 ## Day template
 
 ```kotlin
+@Suppress("unused")
 fun dayX() {
     val input = readInputFile(X)
     val input2 = Input(

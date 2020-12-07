@@ -2,6 +2,7 @@ import util.head
 import util.readInputFile
 import util.tail
 
+@Suppress("unused")
 fun day1() {
     val input = readInputFile(1).toIntList()
 //    val input = """

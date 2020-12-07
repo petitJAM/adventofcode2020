@@ -1,5 +1,6 @@
 import util.readInputFile
 
+@Suppress("unused")
 fun day3() {
     val input = readInputFile(3).toList()
     val input2 = """

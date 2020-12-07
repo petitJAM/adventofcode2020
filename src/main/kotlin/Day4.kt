@@ -1,8 +1,8 @@
 import util.Input
-import util.printList
 import util.readInputFile
 import util.splitLast
 
+@Suppress("unused")
 fun day4() {
     val input = readInputFile(4)
 //    val input2 = Input(

@@ -1,8 +1,8 @@
-import util.Input
 import util.readInputFile
 import kotlin.math.abs
 import kotlin.math.pow
 
+@Suppress("unused")
 fun day5() {
     val input = readInputFile(5).toList()
 //    val input2 = Input(

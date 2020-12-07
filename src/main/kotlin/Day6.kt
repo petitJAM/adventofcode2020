@@ -1,6 +1,7 @@
 import util.Input
 import util.readInputFile
 
+@Suppress("unused")
 fun day6() {
     val input = readInputFile(6)
 //    val input2 = Input(
