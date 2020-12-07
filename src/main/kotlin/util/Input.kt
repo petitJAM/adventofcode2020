@@ -8,6 +8,10 @@ inline class Input(val inputStr: String) {
         return inputStr.split("\n")
     }
 
+    fun toGroupList(): List<String> {
+        return inputStr.split("\n\n")
+    }
+
     fun toIntList(): List<Int> {
         return toList().map(String::toInt)
     }
