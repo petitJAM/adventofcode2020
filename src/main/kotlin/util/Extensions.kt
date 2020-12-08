@@ -1,5 +1,9 @@
 package util
 
+fun Any?.TODO(): Nothing {
+    throw NotImplementedError()
+}
+
 /**
  * The first element of the list.
  */
