@@ -1,6 +1,7 @@
 package util
 
 import java.io.File
+import java.math.BigInteger
 
 inline class Input(val inputStr: String) {
 
@@ -14,6 +15,10 @@ inline class Input(val inputStr: String) {
 
     fun toIntList(): List<Int> {
         return toList().map(String::toInt)
+    }
+
+    fun toBigIntegerList(): List<BigInteger> {
+        return toList().map(String::toBigInteger)
     }
 }
 
