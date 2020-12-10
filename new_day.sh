@@ -18,7 +18,7 @@ fun day$DAY_NUM() {
     val input = readInputFile($DAY_NUM)
     val input2 = Input(
         """
-    """.trimIndent()
+        """.trimIndent()
     )
 
     val answer = -1
