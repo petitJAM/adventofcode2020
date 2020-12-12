@@ -18,7 +18,7 @@ fun day5() {
     val answer = seats.maxByOrNull { it.id }?.id
     println("The answer to part 1 is ... $answer")
 
-    val answer2 = seats.map(Seat::id).sorted()
+    val answer2 = seats.map(SeatDay5::id).sorted()
         .zipWithNext()
         .first { abs(it.first - it.second) > 1 }
         .let { it.first + 1 }
@@ -27,18 +27,18 @@ fun day5() {
 
 // Data
 
-private typealias Seat = Pair<Int, Int>
+private typealias SeatDay5 = Pair<Int, Int>
 
-private val Seat.row: Int
+private val SeatDay5.row: Int
     get() = first
 
-private val Seat.column: Int
+private val SeatDay5.column: Int
     get() = second
 
-private val Seat.id: Int
+private val SeatDay5.id: Int
     get() = row * 8 + column
 
-private fun parseSeat(input: String): Seat {
+private fun parseSeat(input: String): SeatDay5 {
     val rowChars = input.substring(0, 7).toCharArray()
     val colChars = input.substring(7).toCharArray()
 
@@ -50,5 +50,5 @@ private fun parseSeat(input: String): Seat {
         if (c == 'L') 0 else 2f.pow(2 - index).toInt()
     }.sum()
 
-    return Seat(row, col)
+    return SeatDay5(row, col)
 }

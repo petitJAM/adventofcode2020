@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.21"
     application
 }
 
@@ -26,7 +26,7 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.freeCompilerArgs = listOf("-Xinline-classes")
+    kotlinOptions.freeCompilerArgs = listOf("-Xinline-classes -Xopt-in=kotlin.RequiresOptIn")
 }
 
 application {
