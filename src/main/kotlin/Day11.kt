@@ -1,5 +1,4 @@
-import util.Input
-import util.readInputFile
+import util.*
 
 @Suppress("unused")
 fun day11() {
@@ -130,14 +129,6 @@ private fun SeatingArea.occupiedNeighborCount(point: Point): Int =
 
 private operator fun SeatingArea.get(point: Point): Seat =
     this[point.y][point.x]
-
-private typealias Point = Pair<Int, Int>
-
-private val Point.x: Int
-    get() = first
-
-private val Point.y: Int
-    get() = second
 
 @OptIn(ExperimentalStdlibApi::class)
 private fun Point.neighbors(): List<Point> {
