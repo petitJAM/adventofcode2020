@@ -4,6 +4,8 @@ fun Any?.TODO(): Nothing {
     throw NotImplementedError()
 }
 
+fun <T> T.alsoPrint() = this.also { println(it) }
+
 /**
  * The first element of the list.
  */
