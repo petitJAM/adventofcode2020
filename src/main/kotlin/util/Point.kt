@@ -7,3 +7,5 @@ val Point.x: Int
 
 val Point.y: Int
     get() = second
+
+operator fun Point.plus(other: Point): Point = Point(x + other.x, y + other.y)

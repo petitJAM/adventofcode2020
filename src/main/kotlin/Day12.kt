@@ -1,5 +1,4 @@
 import util.*
-import kotlin.TODO
 import kotlin.math.abs
 
 @Suppress("unused")
@@ -37,9 +36,48 @@ fun day12() {
     val answer = directions.calculateFinalPosition().first.let { abs(it.x) + abs(it.y) }
     println("The answer to part 1 is ... $answer")
 
-    val answer2 = -1
+    val answer2 = directions.calculateFinalPosition2().shipPosition.let { abs(it.x) + abs(it.y) }
     println("The answer to part 2 is ... $answer2")
 }
+
+// Part 2
+
+private fun List<Direction>.calculateFinalPosition2(
+    startingNavigationPosition: NavigationPosition = NavigationPosition(
+        shipPosition = Point(0, 0),
+        facing = Facing.E,
+        waypointPosition = Point(10, -1),
+    )
+): NavigationPosition = this
+    .fold(startingNavigationPosition) { acc, direction ->
+        when (direction.action) {
+            Action.N -> acc.copy(waypointPosition = acc.waypointPosition + Point(0, -direction.value))
+            Action.E -> acc.copy(waypointPosition = acc.waypointPosition + Point(direction.value, 0))
+            Action.S -> acc.copy(waypointPosition = acc.waypointPosition + Point(0, direction.value))
+            Action.W -> acc.copy(waypointPosition = acc.waypointPosition + Point(-direction.value, 0))
+            Action.L, Action.R -> {
+                when (val value = if (direction.action == Action.L) -direction.value else direction.value) {
+                    180, -180 -> acc.copy(waypointPosition = Point(-acc.waypointPosition.x, -acc.waypointPosition.y))
+                    90, -270 -> acc.copy(waypointPosition = Point(-acc.waypointPosition.y, acc.waypointPosition.x))
+                    270, -90 -> acc.copy(waypointPosition = Point(acc.waypointPosition.y, -acc.waypointPosition.x))
+                    0 -> acc
+                    else -> throw IllegalArgumentException("Can't turn by $value degrees")
+                }
+            }
+
+            Action.F -> acc.copy(
+                shipPosition = acc.shipPosition + acc.waypointPosition.let {
+                    Point(it.x * direction.value, it.y * direction.value)
+                }
+            )
+        }
+    }
+
+private data class NavigationPosition(
+    val shipPosition: Point,
+    val facing: Facing,
+    val waypointPosition: Point,
+)
 
 // Part 1
 
@@ -64,9 +102,9 @@ private fun List<Direction>.calculateFinalPosition(
                 Facing.W -> Point(point.x - direction.value, point.y) to facing
             }
         }
-            .also { (point, facing) ->
-                println("From $acc, \t\tmove by $direction \t\tto $point facing $facing")
-            }
+//            .also { (point, facing) ->
+//                println("From $acc, \t\tmove by $direction \t\tto $point facing $facing")
+//            }
     }
 
 // Data
