@@ -28,3 +28,6 @@ class BigIntegerRangeIterator(
         return current++
     }
 }
+
+fun Iterable<BigInteger>.sum(): BigInteger = this
+    .reduce { acc, bigInteger -> acc + bigInteger }
