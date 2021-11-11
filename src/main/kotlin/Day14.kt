@@ -1,5 +1,3 @@
-@file:Suppress("EXPERIMENTAL_FEATURE_WARNING")
-
 import util.Input
 import util.TODO
 import util.readInputFile
@@ -26,9 +24,52 @@ fun day14() {
     val answer = parseInput(input).run().values.sum()
     println("The answer to part 1 is ... $answer")
 
-    val answer2 = -1
+    val answer2 = parseInput(input).runV2().values.sum()
     println("The answer to part 2 is ... $answer2")
 }
+
+// Part 2
+
+private fun Program.runV2(): Map<BigInteger, BigInteger> {
+    val memory = mutableMapOf<BigInteger, BigInteger>()
+    var currentMask = Bitmask.DEFAULT
+
+    forEach { command ->
+        when (command) {
+            is Command.WriteBitmask -> currentMask = command.bitmask
+            is Command.WriteMemory -> {
+                val address = command.address.toBigInteger()
+                val floatingAddress = address.toBitString().zip(currentMask.str)
+                    .map { (real, mask) ->
+                        when (mask) {
+                            '0' -> real
+                            '1' -> '1'
+                            'X' -> 'X'
+                            else -> throw IllegalStateException("Bitmask contains unexpected char $mask")
+                        }
+                    }
+                    .joinToString("")
+                val floatingCount = floatingAddress.count { it == 'X' }
+                generateFloatingPermutations(floatingCount)
+                    .map { floatingValues ->
+                        // TODO: for each floating value, replace the first X with the floating value
+                    }
+
+                TODO()
+            }
+        }
+    }
+
+    return memory
+}
+
+private fun generateFloatingPermutations(n: Int): List<String> =
+    (0..2f.pow(n).toInt())
+        .map { it.toString(2) }
+        .let { list ->
+            val max = list.map { it.length }.maxOrNull() ?: 0
+            list.map { it.padStart(max, '0') }
+        }
 
 // Part 1
 
@@ -60,7 +101,7 @@ private fun Program.run(): Map<Int, BigInteger> {
 private sealed class Command {
 
     data class WriteBitmask(
-        val bitmask: Bitmask
+        val bitmask: Bitmask,
     ) : Command()
 
     data class WriteMemory(
@@ -101,7 +142,7 @@ private sealed class Command {
     }
 }
 
-inline class Bitmask(private val str: String) {
+inline class Bitmask(val str: String) {
 
     companion object {
         val DEFAULT = Bitmask("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
@@ -120,9 +161,9 @@ inline class Bitmask(private val str: String) {
             .let {
                 BigInteger(it, 2)
             }
-
-    private fun BigInteger.toBitString(): String = toString(2).padStart(36, '0')
 }
+
+private fun BigInteger.toBitString(): String = toString(2).padStart(36, '0')
 
 private typealias Program = List<Command>
 
